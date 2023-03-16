@@ -5,13 +5,19 @@ import com.global.hr.datajpahrproject.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/department")
 public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
+    @GetMapping(path = "/findAll")
+    public List<Department> findAll(){
+        return departmentService.findAll();
+    }
     @GetMapping(path = "/findById")
-    public Department findById(Long id){
+    public Department findById(@RequestParam Long id){
         return departmentService.findById(id);
     }
     @PostMapping(path = "/insert")

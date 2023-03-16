@@ -2,6 +2,8 @@ package com.global.hr.datajpahrproject.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "hr_departments")
 public class Department {
@@ -9,14 +11,27 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
     private String name;
+    @OneToMany(mappedBy = "department")
+    private List<Employee> employees;
 
     public Department() {
     }
 
-    public Department(Long id, String name) {
+    public Department(Long id, String name, List<Employee> employees) {
         this.id = id;
         this.name = name;
+        this.employees = employees;
     }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+
 
     public Long getId() {
         return id;

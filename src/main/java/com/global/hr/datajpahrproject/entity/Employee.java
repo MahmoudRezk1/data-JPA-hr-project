@@ -1,5 +1,6 @@
 package com.global.hr.datajpahrproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -16,6 +17,7 @@ public class Employee {
     private Double salary;
     @ManyToOne
     @JoinColumn(name = "department_id",referencedColumnName = "id")
+    @JsonIgnore
     private Department department;
 
     public Employee() {

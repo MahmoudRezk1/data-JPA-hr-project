@@ -12,6 +12,9 @@ import java.util.List;
 public class DepartmentService {
     @Autowired
     private DepartmentRepo departmentRepo;
+    public List<Department> findAll(){
+        return departmentRepo.findAll();
+    }
 
     public Department findById(Long id){
         return departmentRepo.findById(id).orElseThrow();
