@@ -2,6 +2,9 @@ package com.global.hr.datajpahrproject.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "sec_Users")
 public class User {
@@ -11,8 +14,21 @@ public class User {
 
     private String userName;
     private String password;
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY)
     private Employee employee;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "sec_users_roles"
+            ,joinColumns = @JoinColumn(name = "user_id")
+            ,inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public Employee getEmployee() {
         return employee;
